@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<h1>Hey Thomas!! Today is your Birthday!!!</h1>
+<p>I made a little something for you. Click the button below to go to your birthday page!!</p>
+
+<a href="/Birthday" class="birthday-button">ClickMeBabe ❤️</a>
+<br /> <!-- Line break for spacing -->
+
+<style>
+    .birthday-button {
+        display: inline-block;
+        padding: 10px 20px;
+        color: white;
+        background-color: #ff69b4;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1.2em;
+        font-family: Arial, sans-serif;
+        transition: background-color 0.3s ease;
+    }
+
+        .birthday-button:hover {
+            background-color: #ff85c0;
+        }
+
+    .image-frame {
+        width: 1000px; /* Adjust width as needed */
+        height: 1000px; /* Adjust height as needed */
+        border-radius: 50%; /* Makes the div circular */
+        overflow: hidden; /* Ensures the image fits within the circle */
+        border: 5px solid #ff69b4; /* Circle border color and thickness */
+        display: flex;
+        justify-content: center; /* Center the image horizontally */
+        align-items: center; /* Center the image vertically */
+        margin: 20px auto; /* Center the frame horizontally with margin */
+    }
+
+        .image-frame img {
+            width: 100%; /* Ensures the image fills the frame */
+            height: auto; /* Keeps the aspect ratio */
+            border-radius: 50%; /* Also applies circular cropping to the image */
+        }
+</style>
+
+<div class="image-frame">
+    <img src="~/Images/unnamed.jpg" alt="Birthday Image" />
+</div>

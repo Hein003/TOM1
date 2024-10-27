@@ -1,0 +1,175 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Happy Birthday!";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        body {
+            background-color: #f0f8ff;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            padding: 50px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #ff69b4;
+            font-size: 3em;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+
+        button {
+            background-color: #ff4500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px; /* Add margin for spacing */
+        }
+
+            button:hover {
+                background-color: #ff6347;
+            }
+
+        .hidden-content {
+            display: none; /* Hidden by default */
+            margin-top: 20px;
+        }
+
+        .hidden-message {
+            display: none; /* Hidden by default */
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: black; /* Change to black */
+        }
+
+        /* Swiper styles */
+        .swiper {
+            width: 100%;
+            height: 300px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🎉 Happy Birthday! 🎉</h1>
+        <p id="birthdayMessage" style="display:none;">Hope you have an amazing day filled with love and laughter with your loved ones!</p>
+        <p>Wishing you a wonderful day filled with joy and laughter!</p>
+        <button id="celebrateButton">Celebrate!</button>
+
+        <!-- Instructions to unwrap -->
+        <p>Click the button to unwrap the present, Tom Tom! 🎁</p>
+
+        <!-- New Unwrap Button -->
+        <button id="unwrapButton">Unwrap the Present!</button>
+
+        <!-- Hidden content to show when unwrapped -->
+        <div id="presentContent" class="hidden-content">
+            <p>🎁 Surprise! Here’s a special gift just for you! 🎁</p>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <img src="~/Images/pic1.jpg" alt="Gift 1" style="width: 30%; border-radius: 10px;">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="~/Images/pic2.jpg" alt="Gift 2" style="width: 30%; border-radius: 10px;">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="~/Images/pic3.jpg" alt="Gift 3" style="width: 30%; border-radius: 10px;">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+            <p>It is Weber Premium Kettle Black 57cm! 🔥🍔🥩</p>
+        </div>
+
+        <!-- Hidden message to show after unwrapping -->
+        <div id="loveMessage" class="hidden-message">
+            I love you so much. You are the most amazing, kindest and loving person that I have ever met. You deserve all the best things in the world. Thank you for everything. Here is my little gift for you. You have to make me delicious food using this haha!! Love you so much xx
+        </div>
+    </div>
+
+    <audio id="celebrationSound" src="~/sounds/happybirthday.mp3" preload="auto"></audio>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.5.1/confetti.browser.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.getElementById("celebrateButton").addEventListener("click", function () {
+            var audio = document.getElementById("celebrationSound");
+            var message = document.getElementById("birthdayMessage");
+
+            if (audio.paused) {
+                audio.play();
+                message.style.display = "block";
+
+                // Start confetti effect
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0 }
+                });
+            } else {
+                audio.pause();
+                audio.currentTime = 0; // Reset audio to start
+                message.style.display = "none";
+            }
+        });
+
+        // Unwrap the Present Button Functionality
+        document.getElementById("unwrapButton").addEventListener("click", function () {
+            var presentContent = document.getElementById("presentContent");
+            var loveMessage = document.getElementById("loveMessage");
+
+            // Toggle the visibility of the present content
+            if (presentContent.style.display === "none" || presentContent.style.display === "") {
+                presentContent.style.display = "block";
+                loveMessage.style.display = "block"; // Show the love message
+            } else {
+                presentContent.style.display = "none"; // Hide again if clicked
+                loveMessage.style.display = "none"; // Hide love message too
+            }
+        });
+
+        // Initialize Swiper
+        var swiper = new Swiper('.swiper', {
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            loop: true,
+        });
+    </script>
+</body>
+</html>
